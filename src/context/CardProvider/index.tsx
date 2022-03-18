@@ -11,19 +11,21 @@ type CreditCardProviderProps = {
   cards: CardType[],
   addCard: (card: CardType, country: string) => void,
   removeCard: (card: CardType) => void
+  countries: string[]
+  updateCountries: (countries: string[]) => void
 }
 
 const CreditCardContext = React.createContext<Partial<CreditCardProviderProps>>({})
 
-const BANNED_COUNTRIES = ['SOMALIA', 'TAIWAN']
-
 export const useCreditCardContext = (): Partial<CreditCardProviderProps> => React.useContext(CreditCardContext)
 
 export const PERSIST_KEYWORD = 'PersistCard'
+const BANNED_KEYWORD = 'banned_countries'
 
 const CreditCardProvider: React.FC = ({ children }) => {
   const toast = useToast()
   const [cards, setCards] = React.useState<CardType[]>([])
+  const [bannedCountries, setBannedCountries] = React.useState<string[]>([])
 
 
   React.useEffect(() => {
@@ -31,6 +33,10 @@ const CreditCardProvider: React.FC = ({ children }) => {
      if(response){
        const payload = JSON.parse(response)
         setCards(payload)
+     }
+     const countriesResponse = localStorage.getItem(BANNED_KEYWORD)
+     if(countriesResponse){
+      setBannedCountries(JSON.parse(countriesResponse))
      }
   }, []) 
 
@@ -44,7 +50,7 @@ const CreditCardProvider: React.FC = ({ children }) => {
       return 
     }
 
-    if(BANNED_COUNTRIES.includes(country.toUpperCase())){
+    if(bannedCountries.includes(country.toUpperCase())){
       toast({description: `Cards from ${country} are banned.`, status: 'error'})
       return 
     }
@@ -63,12 +69,20 @@ const CreditCardProvider: React.FC = ({ children }) => {
     setCards(previousCards => previousCards.filter(el => el.cardNumber !== card.cardNumber))
   }
 
+  const updateCountries = (countries: string[]) => {
+    setBannedCountries(countries)
+    console.log(countries)
+    localStorage.setItem(BANNED_KEYWORD, JSON.stringify(countries))
+  }
+
   return (
     <CreditCardContext.Provider
       value={{
         cards,
         addCard,
-        removeCard
+        removeCard,
+        countries: bannedCountries,
+        updateCountries
       }}
     >
       {children}

@@ -18,7 +18,6 @@ const PageWrap: React.FC<PageWrapProps> = ({ children, title, containerStyles })
         flexDirection="column"
         alignItems="flex-start"
         justifyContent="flex-start"
-        p={4}
         width='100vw'
         height='100vh'
         overflow='hidden'

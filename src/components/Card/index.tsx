@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({card}) => {
             <Text>{`Card Number: ${lastFour.padStart(card.cardNumber.length, '*')}`}</Text>
             <Text>{`Expiry Date: ${card.expiryDate}`}</Text>
         </Flex>
-        <IconButton aria-label='Toggle Password Visibility' icon={<ImBin size={30} color='black'/>} onClick={() => removeCard && removeCard(card)}/>
+        <IconButton aria-label='Remove Card' icon={<ImBin size={30} color='black'/>} onClick={() => removeCard && removeCard(card)}/>
     </Flex>
 }
 
