@@ -50,7 +50,7 @@ const CreditCardProvider: React.FC = ({ children }) => {
       return 
     }
 
-    if(bannedCountries.includes(country.toUpperCase())){
+    if(bannedCountries.includes(country)){
       toast({description: `Cards from ${country} are banned.`, status: 'error'})
       return 
     }
