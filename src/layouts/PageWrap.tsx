@@ -18,9 +18,9 @@ const PageWrap: React.FC<PageWrapProps> = ({ children, title, containerStyles })
         flexDirection="column"
         alignItems="flex-start"
         justifyContent="flex-start"
-        width='100vw'
-        height='100vh'
-        overflow='hidden'
+        width="100vw"
+        height="100vh"
+        overflow="hidden"
         {...containerStyles}
       >
         {children}
@@ -28,6 +28,5 @@ const PageWrap: React.FC<PageWrapProps> = ({ children, title, containerStyles })
     </>
   )
 }
-
 
 export default PageWrap

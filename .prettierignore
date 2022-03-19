@@ -1,0 +1,10 @@
+tsconfig.json
+.vscode
+.github
+.prettierrc
+firebase.json
+package.json
+node_modules
+build
+public
+README.md

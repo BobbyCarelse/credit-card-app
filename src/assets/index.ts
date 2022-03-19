@@ -1,5 +1,5 @@
 const images = {
-    404: require('./notFound.png')
+  404: require('./notFound.png')
 }
 
 export default images
